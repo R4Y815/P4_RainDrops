@@ -8,14 +8,14 @@ import 'core-js/es/function';
 import { arrow } from './arrowFn.js';
 
 console.log('This is from index.js');
-console.log('This is from cat.js', cat);
 console.log('This is from mouse.js', mouse);
 
+/* For Spread operator demo */
 const obj = {
   a: 'apple',
   b: 'buffalo',
 };
-
+/* Spread Operators are an ES 6 feature and typically not on most browsers, if this can work that means Babel npm is working */
 const newObj = { ...obj, c: 'cheetah' };
 console.log('new obj', newObj);
 
