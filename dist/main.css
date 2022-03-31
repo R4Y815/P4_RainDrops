@@ -4,3 +4,13 @@
 body {
   background-color: green; }
 
+.item {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid grey;
+  width: 28%;
+  display: inline-block;
+  word-wrap: break-word; }
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5jc3MiLCJtYXBwaW5ncyI6Ijs7O0FBQUE7RUFDRSx1QkFBdUI7O0FBRXpCO0VBQ0UsYUFBWTtFQUNaLFlBQVc7RUFDWCxzQkFBcUI7RUFDckIsVUFBUztFQUNULHFCQUFvQjtFQUNwQixxQkFBb0IiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wcm9qZWN0LTMvLi9zcmMvbWFpbi5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbImJvZHkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjtcbn1cbi5pdGVte1xuICBwYWRkaW5nOjEwcHg7XG4gIG1hcmdpbjoxMHB4O1xuICBib3JkZXI6MXB4IHNvbGlkIGdyZXk7XG4gIHdpZHRoOjI4JTtcbiAgZGlzcGxheTppbmxpbmUtYmxvY2s7XG4gIHdvcmQtd3JhcDpicmVhay13b3JkO1xufVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/

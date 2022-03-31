@@ -1,20 +1,18 @@
-// webpack.config.js
+// webpack.common.js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // or 'production'
-  devtool: false,
   entry: './src/index.js',
+  /* Below Chunk: spliced from repo */
   output: {
-    filename: 'main-[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name]-[contenthash].bundle.js',
+    path: path.resolve(__dirname, '../dist'),
     clean: true
   },
-   plugins: [
+  /* Above Chunk: spliced from repo */
+  plugins: [
       new MiniCssExtractPlugin(),
-      new HtmlWebpackPlugin({ template: './src/template.html' }),
     ],
   /* loaders */
   module: {

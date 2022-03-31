@@ -2,7 +2,7 @@ module.exports = {
   development: {
     username: 'raytor27',
     password: null,
-    database: 'webp_items_development',
+    database: 'krbrade_db',
     host: '127.0.0.1',
     dialect: 'postgres',
   },
