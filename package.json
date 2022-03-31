@@ -1,0 +1,46 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "planning.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R4Y815/Project-3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/R4Y815/Project-3/issues"
+  },
+  "homepage": "https://github.com/R4Y815/Project-3#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cookie-parser": "^1.4.6",
+    "core-js": "^3.21.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "faker": "^5.5.3",
+    "method-override": "^3.0.0",
+    "node-sass": "^7.0.1",
+    "pg": "^8.7.3",
+    "sass-loader": "^12.6.0",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sequelize-cli": "^6.4.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
