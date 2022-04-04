@@ -1,39 +1,45 @@
-// webpack.common.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
-  /* Below Chunk: spliced from repo */
+  entry: {
+    main: './src/index.js',
+  },
   output: {
     filename: '[name]-[contenthash].bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    clean: true
+    // Replace previously-compiled files with latest one on each build
+    clean: true,
   },
-  /* Above Chunk: spliced from repo */
   plugins: [
-      new MiniCssExtractPlugin(),
-    ],
-  /* loaders */
+    new HtmlWebpackPlugin({
+      // Name this file main so it does not get automatically requested as a static file
+      filename: 'main.html',
+      template: path.resolve(__dirname, '..', 'src', 'main.html'),
+    }),
+    new MiniCssExtractPlugin(),
+  ],
   module: {
     rules: [
       {
-        // this is regex, it tells webpack to look for files that end with .css
-        test: /\.scss$/,
-        // the sequence here matters! style-loader needs to come before css-loader
-        // because webpack reads these things from right to left
-        use: [
-          MiniCssExtractPlugin.loader, // step 3: injects Javascript into the DOM
-          'css-loader', // step 2: turns css into valid Javascript
-          'sass-loader', // step 1: converts sass to css
-        ],
+        // Regex to decide which files to run Babel on
+        test: /\.(js|mjs|jsx)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        }],
       },
       {
-       test: /\.js$/, /* this is regex it tells webpack to look for all files which end in .js*/ 
-       use: {
-         /* this will automatically reference a .babelrc file */
-         loader: 'babel-loader',
-       },
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
