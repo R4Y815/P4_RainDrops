@@ -1,8 +1,8 @@
 module.exports = {
   development: {
-    username: 'raytor27',
+    username: '<INSERT PSQL USERNAME HERE>',
     password: null,
-    database: 'krbrade_db',
+    database: '615_template_db',
     host: '127.0.0.1',
     dialect: 'postgres',
   },
