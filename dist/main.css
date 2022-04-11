@@ -1,2 +1,20 @@
-body{background-color:green}.item{padding:10px;margin:10px;border:1px solid grey;width:28%;display:inline-block;word-wrap:break-word}
+/*!********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/main.scss ***!
+  \********************************************************************************************************/
+body {
+  background-color: white;
+  color: red; }
+
+.item {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid grey;
+  width: 28%;
+  display: inline-block;
+  word-wrap: break-word; }
+
+.wowText {
+  color: chocolate;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 400; }
 
