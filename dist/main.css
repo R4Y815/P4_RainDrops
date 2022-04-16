@@ -18,3 +18,29 @@ body {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: 400; }
 
+.warning {
+  color: purple; }
+
+.listText {
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.gray {
+  background-color: gray; }
+
+.white {
+  background-color: white; }
+
+.hero-text {
+  color: pink; }
+
+.warning2 {
+  color: greenyellow; }
+
+.ba2txt {
+  color: #023c3c; }
+
+.typePic {
+  height: 75px;
+  width: auto; }
+
