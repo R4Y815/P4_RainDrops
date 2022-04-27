@@ -16,7 +16,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       // Name this file main so it does not get autosmatically requested as a static file
       filename: 'main.html',
-      template: path.resolve(__dirname, '..', 'src', 'main.html'),
+      template: path.resolve(__dirname, '..', 'src', 'index.html'),
     }),
     new MiniCssExtractPlugin(),
   ],
@@ -38,12 +38,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 
+        {
+          loader: 'css-loader',
+        },
+         'sass-loader'],
       },
-      {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      },
+
     ],
   },
 };

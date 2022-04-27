@@ -1,12 +1,16 @@
 import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
+// Import your initialised models here:
 import initItemModel from './item.mjs';
+
+
 
 const env = process.env.NODE_ENV || 'development';
 const config = allConfig[env];
 const db = {};
 let sequelize;
+
 
 // If env is production, retrieve database auth details from the
 // DATABASE_URL env var that Heroku provides us
@@ -33,7 +37,11 @@ else {
     config);
 }
 
+// add db. model definitions here: 
 db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+
+// define One-> Many, Many-> Many table to table relations here
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -8,7 +8,7 @@ export default function bindRoutes(app) {
   app.get('/items', ItemsController.index);
 
   // special JS page. Include the webpack index.html file
-  app.get('/home', (request, response) => {
+  app.get('/', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
   });
 }
