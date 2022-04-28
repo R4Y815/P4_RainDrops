@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './styles.scss'; /* for stylesheet */
 import 'core-js/es/function';
 
@@ -14,9 +13,8 @@ const rootComponent = createRoot(rootEl);
 
 rootComponent.render(<App />);
 
-
-/* 
-// RA repo: 
+/*
+// RA repo:
 // create an element that React will render stuff into
 const rootElement = document.createElement('div');
 

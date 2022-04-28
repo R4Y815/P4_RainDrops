@@ -22,7 +22,6 @@
 	},
 	"homepage": "https://github.com/R4Y815/Project-4#readme",
 	"dependencies": {
-		"axios": "^0.26.1",
 		"cookie-parser": "^1.4.6",
 		"core-js": "^3.21.1",
 		"ejs": "^3.0.2",
@@ -45,12 +44,20 @@
 		"@faker-js/faker": "^6.1.1",
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
 		"@svgr/webpack": "^6.2.1",
+		"axios": "^0.27.2",
 		"babel-loader": "^8.2.4",
+		"bootstrap": "^5.1.3",
 		"css-loader": "^6.7.1",
-		"eslint": "^8.12.0",
+		"eslint": "^8.14.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-react": "^7.29.4",
+		"eslint-plugin-react-hooks": "^4.5.0",
 		"html-webpack-harddisk-plugin": "^2.0.0",
 		"mini-css-extract-plugin": "^2.6.0",
 		"react": "^18.0.0",
+		"react-bootstrap": "^2.3.1",
 		"react-dom": "^18.0.0",
 		"react-refresh": "^0.13.0",
 		"sequelize-cli": "^6.4.1",
@@ -59,5 +66,8 @@
 		"webpack-cli": "^4.9.2",
 		"webpack-dev-middleware": "^5.3.1",
 		"webpack-hot-middleware": "^2.25.1"
-	}
+	},
+	"lint": "eslint .",
+	"lint:fix": "eslint --fix",
+	"format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
 }

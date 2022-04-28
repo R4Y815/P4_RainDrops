@@ -1,22 +1,7 @@
-/* Generated ESLINT rules */
-/* module.exports = {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-    },
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {
-    }
-} */
-
 module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -26,7 +11,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: [
@@ -55,4 +40,3 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
   },
 };
-

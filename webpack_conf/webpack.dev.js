@@ -1,4 +1,4 @@
-const ReactRefreshWebpackPlugin = require( '@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -12,12 +12,12 @@ module.exports = merge(common, {
   //
   mode: 'development',
   devtool: 'inline-source-map',
-  watch: true, 
-    module: {
+  watch: true,
+  module: {
     rules: [
       {
         // Regex to decide which files to run Babel on
-        test: /\.(js|mjs|jsx)$/, // CHANGE HERE: jsx added , regex to see which files to run babel on 
+        test: /\.(js|mjs|jsx)$/, // CHANGE HERE: jsx added , regex to see which files to run babel on
         exclude: /node_modules/,
         use: [
           {
@@ -41,7 +41,7 @@ module.exports = merge(common, {
         sockIntegration: 'whm',
       },
     }),
-     new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       // name this file main, so that it does not get automatically requested as a static file
       filename: './main.html',
       template: path.resolve(__dirname, '..', 'src', 'index.html'),
