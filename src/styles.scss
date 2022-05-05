@@ -26,6 +26,7 @@
 
 .camera {
 	position: relative;
+	top: 200px;
 }
 
 .result {
@@ -34,10 +35,10 @@
 	top: 0;
 	left: 100%;
 	width: 100%;
-	height: 100%;
+	height: 102%;
 	display: flex;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.9);
+	background-color: rgba(0, 0, 0, 0.2);
 	transition: 0.4s;
 }
 
@@ -53,8 +54,8 @@ video {
 
 .cameraBtn {
 	position: absolute;
-	bottom: 20px;
-	left: 20px;
+	bottom: -70px;
+	right: 20px;
 
 	appearance: none;
 	border: none;
@@ -75,6 +76,34 @@ video {
 	background-position: 100%;
 }
 
+.closeBtn {
+	position: absolute;
+	bottom: -70px;
+	left: 20px;
+
+	appearance: none;
+	border: none;
+	outline: none;
+
+	padding: 8px 16px;
+	background-image: linear-gradient(to right, #844fff 50%, #ff4f84 50%);
+	background-position: 0%;
+	background-size: 200%;
+	color: #fff;
+	font-size: 24px;
+	font-weight: 700;
+	transition: 0.4s;
+	cursor: pointer;
+}
+
+.closeBtn:hover {
+	background-position: 100%;
+}
+
+.bdrRd100 {
+	border-radius: 50px;
+}
+
 .btnSmallWidth {
 	max-width: 30vw;
 }
@@ -82,3 +111,17 @@ video {
 	width: 100%;
 	height: auto;
 } */
+
+input,
+textarea {
+	font: 0.9em/1.5em "handwriting", sans-serif;
+	border: none;
+	padding: 0 10px;
+	margin: 0;
+	width: 240px;
+	background: none;
+}
+
+.widthSpan {
+	min-width: 100%;
+}

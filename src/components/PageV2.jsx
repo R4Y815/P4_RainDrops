@@ -5,15 +5,22 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroupItem from 'react-bootstrap/ListGroupItem';
+import Form from 'react-bootstrap/Form';
 
 export default function Page() {
   const [comment, setComment] = useState('');
   const [photoName, setPhotoName] = useState('');
 
+  // CODE BLOCK FOR USING CAMERA
   const videoRef = useRef();
   const photoRef = useRef();
   const downloadRef = useRef();
   const [hasPhoto, setHasPhoto] = useState(false);
+
+  // inputs
+  const commentRef = useRef();
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -30,6 +37,7 @@ export default function Page() {
       });
   };
 
+  // LOAD VIDEO AT THE START
   // useEffect to load video function on start,
   // it is important to set useEffect based on state of videoRef
   useEffect(() => {
@@ -63,12 +71,11 @@ export default function Page() {
     // we call getContext() on the <canvas> element,
     // supplying '2d' as the argument
     const context = photo.getContext('2d');
-
     context.clearRect(0, 0, photo.width, photo.height);
-
     setHasPhoto(false);
   };
 
+  // FUNCTION TO SEND CAMERA STILL FROM CANVAS TO APP BACKEND
   const send = (file) => {
     const data = new FormData();
     data.append('originalname', photoName);
@@ -83,31 +90,24 @@ export default function Page() {
       });
   };
 
+  // FUNCTION TO UPLOAD PHOTO
   const uploadPhoto = () => {
     // get img URI from canvas object
     const canvas = photoRef.current;
-    console.log('canvas =', canvas);
-    // canvas to base64
-    /* const imageUri = canvas.toDataURL('image/png'); // if jpg, write jpeg
-    console.log('imageURI =', imageUri); */
-    // create a dummy anchor element
-    /*     const a = document.createElement('a');
-    a.href = imageUri;
-    a.download = photoName; // this file name has to have random count and has to be linked to StateVariable as name of photo to comment
-    document.body.appendChild(a);
-    console.log('a=', a);
-    a.click(); */
 
     // TRY: canvas to blob first
     canvas.toBlob((blob) => send(blob), 'image/png', 1.0);
 
-    // ALREADY TRIED TO STICK UPLOADER COMPONENT NEW FORM DATA FUNCTION OVER HERE BUT IT DIN WORK
+    /*    // close the shutter
+    closePhoto(); */
   };
 
   return (
     <div>
       <div className="camera border border-primary">
-        <video ref={videoRef} />
+        <video ref={videoRef}>
+          <track default kind="captions" />
+        </video>
         <button
           className="cameraBtn"
           type="button"
@@ -116,39 +116,59 @@ export default function Page() {
           SNAP!
         </button>
       </div>
-      <img src="/photos/5d820cb3bdc163e32bc00fd3b9645787" />
       <div className={`result ${hasPhoto ? 'hasPhoto' : ''}`}>
-        <Container className="p-4">
+        <Container className="p-0">
           <Row>
             <Col md="2">
-              <Card className="px-1 pt-2" border="dark">
+              <Card className="px-0 pt-0" border="dark">
                 <canvas ref={photoRef} />
-                <Card.Body>
-                  <Card.Text>
-                    INPUT for User's Comments
-                  </Card.Text>
+                <Card.Body className="p-1">
+                  <ListGroup className="list-group-flush d-flex justify-content-center">
+                    <div>
+                      <textarea
+                        className="px-1 widthSpan"
+                        ref={commentRef}
+                        type="text"
+                        rows="5"
+                        cols="22"
+                        placeholder="captions, comments, etc"
+                      />
+                    </div>
+
+                    <ListGroupItem className="px-0">
+                      <Form.Group className="mb-3" controlId="formBasicCheckbox2">
+                        <Container>
+                          <Row>
+                            <Col xs={6}>
+                              <Form.Check type="checkbox" label="🐣 Hope" />
+                            </Col>
+                            <Col xs={6}>
+                              <Form.Check type="checkbox" label="Sad" />
+                            </Col>
+                          </Row>
+                        </Container>
+                      </Form.Group>
+                    </ListGroupItem>
+                  </ListGroup>
+
                   <div className="d-flex justify-content-end">
                     <div>
-                      <button
-                        className="cameraBtn"
+                      <Button
+                        className="closeBtn bdrRd100"
                         type="button"
                         onClick={closePhoto}
                       >
-                        CLOSE!
-                      </button>
-
+                        ❌
+                      </Button>
                     </div>
-                    <div>
-                      <button
-                        type="button"
-                        ref={downloadRef}
-                        href=""
-                        onClick={uploadPhoto}
-                      >
-                        UPLOAD!
-                      </button>
-                    </div>
-
+                    <div />
+                    <Button
+                      className="cameraBtn bdrRd100"
+                      type="button"
+                      onClick={uploadPhoto}
+                    >
+                      ✔
+                    </Button>
                   </div>
                 </Card.Body>
               </Card>

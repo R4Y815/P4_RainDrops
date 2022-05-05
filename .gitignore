@@ -2,10 +2,10 @@
 .DS_Store
 
 # Dependency directories
-node_modules/
+node_modules/*
 
 # Distribution folder
-dist
+dist/*
 
 public/animals
 public/music
