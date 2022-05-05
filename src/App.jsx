@@ -3,7 +3,10 @@ import axios from 'axios';
 import './styles.scss';
 
 // Import the other child component files here:
-import Page from './components/Page.jsx';
+import Page from './components/PageV2.jsx';
+import Slideshow from './components/Slideshow.jsx';
+import Uploader from './components/Uploader.jsx';
+import Camera from './components/Camera.jsx';
 
 export default function App() {
   const objTest = {
@@ -14,7 +17,10 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className="App">
+      {/* <Camera /> */}
+      {/* <Uploader /> */}
+      {/* <Slideshow /> */}
       <Page />
       {/* <div className="container">
         <div className="row">

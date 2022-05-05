@@ -8,3 +8,10 @@ node_modules/
 dist
 
 public/animals
+public/music
+z-Backup
+
+.env
+
+# but keep the folders with:
+!*.gitkeep/
