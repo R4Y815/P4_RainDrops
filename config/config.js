@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    username: '<INSERT PSQL USERNAME HERE>',
+    username: 'raytor27',
     password: null,
     database: 'prj4_moodlifter_app',
     host: '127.0.0.1',

@@ -1,5 +1,7 @@
+/* eslint-disable object-shorthand */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -7,16 +9,16 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
-import Form from 'react-bootstrap/Form';
+import MoodSelector from './MoodSelector.jsx';
 
 export default function Page() {
-  const [comment, setComment] = useState('');
+  // STATEVARs generated from Page
+  const [mood, setMood] = useState('joy');
   const [photoName, setPhotoName] = useState('');
 
   // CODE BLOCK FOR USING CAMERA
   const videoRef = useRef();
   const photoRef = useRef();
-  const downloadRef = useRef();
   const [hasPhoto, setHasPhoto] = useState(false);
 
   // inputs
@@ -75,7 +77,7 @@ export default function Page() {
     setHasPhoto(false);
   };
 
-  // FUNCTION TO SEND CAMERA STILL FROM CANVAS TO APP BACKEND
+  // FUNCTION TO SEND CAMERA STILLSHOT FROM CANVAS TO APP BACKEND
   const send = (file) => {
     const data = new FormData();
     data.append('originalname', photoName);
@@ -84,22 +86,39 @@ export default function Page() {
     console.log('new FormData sent from front End =', data);
     axios
       .post('/upload/photo', data)
-      .then((response) => { console.log('response.data.imagePath =', response.data.imagePath); })
+      .then((response) => {
+        /* console.log('response.data.imagePath =', response.data.imagePath); */
+        console.log('response.data.imageKey =', response.data.imageKey);
+
+        // TIMESTAMP for Photo Taken
+        const newTimeString = moment().format('dddd,  D-MMM-YYYY, h:mm a');
+
+        // Construct new Entry Object
+        const newEntry = {
+          photoName: response.data.imageKey,
+          comment: commentRef.current.value,
+          mood: mood,
+          timePrint: newTimeString,
+        };
+        console.log('Entry Object formed =', newEntry);
+
+        // return an axios call here using response data to create new entry from sequelize back end
+      })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  // FUNCTION TO UPLOAD PHOTO
-  const uploadPhoto = () => {
+  // FUNCTION TO UPLOAD PHOTO & COMMENTs
+  const uploadEntry = () => {
     // get img URI from canvas object
     const canvas = photoRef.current;
 
-    // TRY: canvas to blob first
+    // CANVAS to Blob and send image to S3
     canvas.toBlob((blob) => send(blob), 'image/png', 1.0);
 
-    /*    // close the shutter
-    closePhoto(); */
+    // CLOSE Camera slide after entry is submitted
+    closePhoto();
   };
 
   return (
@@ -132,22 +151,12 @@ export default function Page() {
                         rows="5"
                         cols="22"
                         placeholder="captions, comments, etc"
+                        autoFocus
                       />
                     </div>
 
                     <ListGroupItem className="px-0">
-                      <Form.Group className="mb-3" controlId="formBasicCheckbox2">
-                        <Container>
-                          <Row>
-                            <Col xs={6}>
-                              <Form.Check type="checkbox" label="🐣 Hope" />
-                            </Col>
-                            <Col xs={6}>
-                              <Form.Check type="checkbox" label="Sad" />
-                            </Col>
-                          </Row>
-                        </Container>
-                      </Form.Group>
+                      <MoodSelector mood={mood} setMood={setMood} />
                     </ListGroupItem>
                   </ListGroup>
 
@@ -165,7 +174,7 @@ export default function Page() {
                     <Button
                       className="cameraBtn bdrRd100"
                       type="button"
-                      onClick={uploadPhoto}
+                      onClick={uploadEntry}
                     >
                       ✔
                     </Button>

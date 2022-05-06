@@ -46,6 +46,9 @@ export default function bindRoutes(app) {
     console.log(result);
     // when response is sent to server for the photos, server will grab
     // from S3 using the photo/image key
-    response.send({ imagePath: `/photos/${result.Key}` });
+    /* response.send({ imagePath: `/photos/${result.Key}` }); */
+
+    // --> amended to just send imagekey
+    response.send({ imageKey: result.Key });
   });
 }
