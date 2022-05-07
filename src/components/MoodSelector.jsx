@@ -15,7 +15,7 @@ export default function MoodSelector({ mood, setMood }) {
           value="love"
           checked={mood === 'love'}
         />
-        ❤
+        🥰❤
       </label>
       <label>
         <input
@@ -24,7 +24,7 @@ export default function MoodSelector({ mood, setMood }) {
           value="joy"
           checked={mood === 'joy'}
         />
-        😇
+        😇🙌
       </label>
       <label>
         <input
@@ -33,7 +33,7 @@ export default function MoodSelector({ mood, setMood }) {
           value="amazed"
           checked={mood === 'amazed'}
         />
-        😮
+        😮🤯
       </label>
       <label>
         <input
@@ -42,7 +42,16 @@ export default function MoodSelector({ mood, setMood }) {
           value="inspired"
           checked={mood === 'inspired'}
         />
-        💡
+        😀💡
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="mood-select"
+          value="motivated"
+          checked={mood === 'motivated'}
+        />
+        💪🐱‍👓
       </label>
     </div>
 

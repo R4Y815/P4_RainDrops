@@ -1,16 +1,18 @@
-export default function initItemModel(sequelize, DataTypes) {
-  return sequelize.define('item', {
+export default function initSongModel(sequelize, DataTypes) {
+  return sequelize.define('song', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
+    title: {
+      allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
     },
-    description: {
-      type: DataTypes.STRING,
+    categoryId: {
+      type: DataTypes.INTEGER,
     },
     createdAt: {
       allowNull: false,

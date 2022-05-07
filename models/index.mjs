@@ -1,16 +1,15 @@
 import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
-// Import your initialised models here:
-import initItemModel from './item.mjs';
-
-
+import initUserModel from './user.mjs';
+import initCategoryModel from './category.mjs';
+import initPhotoModel from './photo.mjs';
+import initSongModel from './song.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 const config = allConfig[env];
 const db = {};
 let sequelize;
-
 
 // If env is production, retrieve database auth details from the
 // DATABASE_URL env var that Heroku provides us
@@ -31,17 +30,26 @@ if (env === 'production') {
 // If env is not production, retrieve DB auth details from the config
 else {
   sequelize = new Sequelize(
-    config.database, 
+    config.database,
     config.username,
     config.password,
-    config);
+    config,
+  );
 }
 
-// add db. model definitions here: 
-db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+// add db. model definitions here:
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
+db.Photo = initPhotoModel(sequelize, Sequelize.DataTypes);
+db.Song = initSongModel(sequelize, Sequelize.DataTypes);
 
 // define One-> Many, Many-> Many table to table relations here
 
+db.Photo.belongsTo(db.Category);
+db.Category.hasMany(db.Photo);
+
+db.Song.belongsTo(db.Category);
+db.Category.hasMany(db.Song);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

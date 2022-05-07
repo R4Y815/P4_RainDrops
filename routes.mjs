@@ -51,4 +51,7 @@ export default function bindRoutes(app) {
     // --> amended to just send imagekey
     response.send({ imageKey: result.Key });
   });
+
+  // Creating new entry in DataBase
+  app.post('/newEntry', PhotosController.addNewPhoto);
 }

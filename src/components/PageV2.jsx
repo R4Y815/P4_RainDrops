@@ -93,11 +93,38 @@ export default function Page() {
         // TIMESTAMP for Photo Taken
         const newTimeString = moment().format('dddd,  D-MMM-YYYY, h:mm a');
 
+        // CATEGORY GENERATOR:
+        function assignCategory(moodInput) {
+          let categoryId;
+
+          switch (mood) {
+            case 'love':
+              categoryId = 6; // 'lifepartner'
+              break;
+            case 'joy':
+              categoryId = 5; // 'joy'
+              break;
+            case 'amazed':
+              categoryId = 12; // 'wonder'
+              break;
+            case 'inspired':
+              categoryId = 4; // 'inspire'
+              break;
+            case 'motivated':
+              categoryId = 8; // 'motivate'
+              break;
+            default:
+              categoryId = 11; // 'silly'
+          }
+          return categoryId;
+        }
+
         // Construct new Entry Object
         const newEntry = {
           photoName: response.data.imageKey,
           comment: commentRef.current.value,
           mood: mood,
+          categoryId: assignCategory(mood),
           timePrint: newTimeString,
         };
         console.log('Entry Object formed =', newEntry);
