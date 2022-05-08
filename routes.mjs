@@ -7,18 +7,16 @@ import { uploadFile, getFileStream } from './s3.mjs';
 
 // required for sequelized items
 import db from './models/index.mjs';
-import initItemsController from './controllers/items.mjs';
 import initPhotosController from './controllers/photos.mjs';
+import initCategoriesController from './controllers/categories.mjs';
 
 // for multer, uploads to s3
 const upload = multer({ dest: 'public/uploads/' });
 const unlinkFile = util.promisify(fs.unlink);
 
 export default function bindRoutes(app) {
-  const ItemsController = initItemsController(db);
   const PhotosController = initPhotosController(db);
-
-  app.get('/items', ItemsController.index);
+  const CategoriesController = initCategoriesController(db);
 
   // special JS page. Include the webpack index.html file
   app.get('/', (request, response) => {
@@ -54,4 +52,10 @@ export default function bindRoutes(app) {
 
   // Creating new entry in DataBase
   app.post('/newEntry', PhotosController.addNewPhoto);
+
+  // Retrieve list of all category names in ascending order of index
+  app.get('/allCategories', CategoriesController.index);
+
+  // retrieve gallery based on emotionInput
+  app.get('/gallery/:key', PhotosController.playPhotos);
 }
