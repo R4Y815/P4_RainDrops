@@ -70,7 +70,23 @@ export default function initPhotosController(db) {
           },
         },
       );
-      response.send({ gallery });
+
+      const songs = await db.Song.findAll(
+        {
+          aattributes: [
+            'title',
+          ],
+          where: {
+            categoryId: catId,
+          },
+        }
+      );
+      const results = {
+          gallery: gallery,
+          songs: songs,
+          category: key,
+        };
+      response.send({ results });
     } catch (error) {
       console.log(error);
     }

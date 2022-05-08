@@ -13,7 +13,7 @@ export default function Slideshow() {
   const [emotion, setEmotion] = useState('zero');
   const [gallery, setGallery] = useState([]);
   const [audioTrack, setAudioTrack] = useState();
-  const [audioStatus, setAudioStatus] = ('');
+  const [songlist, setSongList] = useState([]);
   // use Refs
   const musicPlayerRef = useRef();
   const startAudio = useRef();
@@ -31,10 +31,14 @@ export default function Slideshow() {
 
   const confirmGallery = () => {
     axios.get(`/gallery/${emotion}`).then((response) => {
-      /*  console.log('response received from backend =', response); */
+       console.log('response received from backend =', response.data);
       const currentGallery = response.data.gallery;
       const display = Array.from(currentGallery);
       setGallery(display);
+
+      const songlist = response.data.songs;
+      const songs = Array.from(songlist);
+      setSongList(songs);
 
       // activate
       musicPlayerRef.current.hidden = false;
