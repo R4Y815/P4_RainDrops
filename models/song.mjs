@@ -9,7 +9,6 @@ export default function initSongModel(sequelize, DataTypes) {
     title: {
       allowNull: false,
       type: DataTypes.STRING,
-      unique: true,
     },
     categoryId: {
       type: DataTypes.INTEGER,

@@ -12,8 +12,8 @@ export default function MoodSelector({ mood, setMood }) {
         <input
           type="radio"
           name="mood-select"
-          value="love"
-          checked={mood === 'love'}
+          value="humor"
+          checked={mood === 'humor'}
         />
         🥰❤
       </label>

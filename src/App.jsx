@@ -5,7 +5,8 @@ import './styles.scss';
 // Import the other child component files here:
 import Page from './components/PageV2.jsx';
 import Slideshow from './components/Slideshow.jsx';
-import Uploader from './components/Uploader.jsx';
+import Uploader from './components/UploaderFile.jsx';
+import UploaderForSeeds from './components/UploaderForSeeds.jsx';
 import Camera from './components/Camera.jsx';
 
 export default function App() {
@@ -18,10 +19,11 @@ export default function App() {
 
   return (
     <div className="App">
+      <UploaderForSeeds />
       {/* <Camera /> */}
       {/* <Uploader /> */}
       {/* <Slideshow /> */}
-      <Page />
+      {/* <Page /> */}
       {/* <div className="container">
         <div className="row">
           <div className="col">

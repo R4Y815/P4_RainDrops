@@ -45,11 +45,11 @@ db.Song = initSongModel(sequelize, Sequelize.DataTypes);
 
 // define One-> Many, Many-> Many table to table relations here
 
-db.Photo.belongsTo(db.Category);
-db.Category.hasMany(db.Photo);
-
 db.Song.belongsTo(db.Category);
 db.Category.hasMany(db.Song);
+
+db.Photo.belongsTo(db.Category);
+db.Category.hasMany(db.Photo);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
