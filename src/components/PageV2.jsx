@@ -130,6 +130,11 @@ export default function Page() {
         console.log('Entry Object formed =', newEntry);
 
         // return an axios call here using response data to create new entry from sequelize back end
+        return (
+          axios
+            .post('/newEntry', newEntry)
+            .catch((error) => { console.log(error); })
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -150,7 +155,7 @@ export default function Page() {
 
   return (
     <div>
-      <div className="camera border border-primary">
+      <div className="camera">
         <video ref={videoRef}>
           <track default kind="captions" />
         </video>

@@ -79,13 +79,13 @@ export default function initPhotosController(db) {
           where: {
             categoryId: catId,
           },
-        }
+        },
       );
       const results = {
-          gallery: gallery,
-          songs: songs,
-          category: key,
-        };
+        gallery,
+        songs,
+        category: key,
+      };
       response.send({ results });
     } catch (error) {
       console.log(error);
