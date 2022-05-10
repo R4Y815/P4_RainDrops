@@ -15,11 +15,10 @@ export default function Slideshow() {
   // STATE Variables Read here
   const [emotion, setEmotion] = useState('zero');
   const [gallery, setGallery] = useState([]);
-  const [audioTrack, setAudioTrack] = useState();
-  const [songlist, setSongList] = useState([]);
+  const [mp3List, setMp3List] = useState([]);
+
+  const [audioStatus, setAudioStatus] = useState("dontLoad");
   // use Refs
-  const musicPlayerRef = useRef();
-  const startAudio = useRef();
   const formRef = useRef();
   const cfmEmotionBtnRef = useRef();
 
@@ -31,8 +30,7 @@ export default function Slideshow() {
       });
   }, []);
 
-  // FNs for playlist songs:
-
+  // FN: get Photos on specific category from db
   const confirmGallery = () => {
     axios.get(`/gallery/${emotion}`).then((response) => {
       console.log('response.data received from backend =', response.data);
@@ -44,14 +42,23 @@ export default function Slideshow() {
       const display = Array.from(currentGallery);
       setGallery(display);
 
-      // Set songlist
-      const songlist = response.data.results.songs;
-      const songs = Array.from(songlist);
-      setSongList(songs);
+      // Set songUrllist
+      const catLabel = response.data.results.category;
+      const songList = response.data.results.songs;
+      const songs = [];
+      for (let i = 0; i < songList.length; i += 1) {
+        const songUrl = `music/${catLabel}/${songList[i].title}.mp3`;
+        songs.push(songUrl);
+      }
 
       // activate music
-      musicPlayerRef.current.hidden = false;
-      musicPlayerRef.current.play();
+      /* handleSongChange(); */
+      /* audioPlayerRef.hidden = false; */
+      /* audioPlayerRef.current.play(); */
+      setMp3List(songs);
+
+      /* audioPlayerRef.load(); */
+      setAudioStatus('load');
 
       // hide the form and button
       formRef.current.hidden = true;
@@ -59,48 +66,7 @@ export default function Slideshow() {
     });
   };
 
-  // set audio track based on emotion selected
-  let track;
-  switch (emotion) {
-    case 'console':
-      track = "music/console/FixYou-Coldplay.mp3";
-      break;
-    case 'family':
-      track = "music/family/IfWeHaveEachOther-AlecBenjamin.mp3";
-      break;
-    case 'father':
-      track = "music/father/NotAllHeroesWearCapes-OwlCity.mp3";
-      break;
-    case 'inspire':
-      track = "music/inspire/KingsandQueens-ThirtySecondstoMars.mp3";
-      break;
-    case 'joy':
-      track = "music/joy/OpenHappiness-ButchWalker.mp3";
-      break;
-    case 'lifepartner':
-      track = "music/lifepartner/Enchanted-OwlCity.mp3";
-      break;
-    case 'lyft':
-      track = "music/lyft/High-LighthouseFamily.mp3";
-      break;
-    case 'motivate':
-      track = "music/motivate/FightSong-RachelPlatten.mp3";
-      break;
-    case 'reassure':
-      track = "music/reassure/ByYourSide-TenthAvenueNorth.mp3";
-      break;
-    case 'recallGoodness':
-      track = "music/recall/LostInSpace-LighthouseFamily.mp3";
-      break;
-    case 'silly':
-      track = "music/silly/GangstasParadise-Coolio.mp3";
-      break;
-    case 'wonder':
-      track = "music/wonder/WhatAWonderfulWorld-LouisArmstrong.mp3";
-      break;
-    default:
-      track = "music/family/SeeYouAgain-CharliePuth.mp3";
-  }
+  console.log('mp3List =', mp3List);
 
   return (
     <div>
@@ -114,20 +80,20 @@ export default function Slideshow() {
                   value={emotion}
                   onChange={(e) => setEmotion(e.target.value)}
                 >
-                  <option value="console">in need of consolation</option>
-                  <option value="family">miss my family</option>
-                  <option value="father">father`s day</option>
-                  <option value="inspire">feel dejected and bored</option>
+                  <option value="console" key="console">in need of consolation</option>
+                  <option value="family" key="family">miss my family</option>
+                  <option value="father" key="father">father`s day</option>
+                  <option value="inspire" key="inspire">feel dejected and bored</option>
 
-                  <option value="joy">feel happy</option>
-                  <option value="lifepartner">thinking of him/her...</option>
-                  <option value="lyft">going thru a very hard time...</option>
-                  <option value="motivate">feels like I'm never win</option>
+                  <option value="joy" key="joy">feel happy</option>
+                  <option value="lifepartner" key="lifepartner">thinking of him/her...</option>
+                  <option value="lyft" key="lyft">going thru a very hard time...</option>
+                  <option value="motivate" key="motivate">feels like Im never win</option>
 
-                  <option value="reassure">feeling tired and unsure of myself</option>
-                  <option value="recallGoodness">feeling like giving up</option>
-                  <option value="silly">feeling very stressed</option>
-                  <option value="wonder">the world is a terrible place</option>
+                  <option value="reassure" key="reassure">feeling tired and unsure of myself</option>
+                  <option value="recallGoodness" key="recallGoodness">feeling like giving up</option>
+                  <option value="silly" key="silly">feeling very stressed</option>
+                  <option value="wonder" key="wonder">the world is a terrible place</option>
                 </select>
                 <Button
                   ref={cfmEmotionBtnRef}
@@ -142,21 +108,21 @@ export default function Slideshow() {
           </Col>
         </Row>
       </Container>
-      <Container className="px-0 mx-0 pt-5 mt-3">
+      <Container className="px-0 mx-0 pt-3 mt-2">
         <Carousel fade indicators={false}>
-          {gallery.map((entry) => (
-            <Carousel.Item interval={2500} key={uuidv4}>
+          {gallery.map((entry, index) => (
+            <Carousel.Item interval={2500} key={entry.photoName}>
               <Container className="p-3">
-                <Row key={uuidv4}>
-                  <Col md="2" key={uuidv4}>
-                    <Card className="px-2 pt-2" border="dark" key={uuidv4}>
-                      <Card.Img variant="top" src={`photos/${entry.photoName}`} key={uuidv4} />
+                <Row>
+                  <Col md="2">
+                    <Card className="px-2 pt-2" border="dark">
+                      <Card.Img variant="top" src={`photos/${entry.photoName}`} key={index} />
                       <Card.Body className="px-0 pb-1 pt-3">
-                        <Card.Text className="mb-0 pb-0 text-center" style={{ color: '#000' }} key={uuidv4}>
+                        <Card.Text className="mb-0 pb-0 text-center" style={{ color: '#000' }} key={entry.comment}>
                           {entry.comment}
                         </Card.Text>
                         <br />
-                        <Card.Text className="mb-0 py-0 timeStamp" style={{ color: '#000' }} key={uuidv4}>
+                        <Card.Text className="mb-0 py-0 timeStamp" style={{ color: '#000' }} key={entry.timePrint}>
                           {entry.timePrint}
                         </Card.Text>
                       </Card.Body>
@@ -168,33 +134,13 @@ export default function Slideshow() {
           ))}
         </Carousel>
       </Container>
+
       <div>
-        <div className="text-center">
-          {' '}
-          <iframe
-            title="startPlay"
-            src="music/silence.mp3"
-            allow="autoplay"
-            ref={startAudio}
-            style={{ display: 'none' }}
-          />
-          <audio // eslint-disable-line jsx-a11y/media-has-caption
-            ref={musicPlayerRef}
-          /* autoPlay
-          muted */
-          /* className="audPlyrColor" */
-            controls
-            loop
-            hidden="true"
-          >
-            <source
-              type="audio/mp3"
-              src="music/wonder/WhatAWonderfulWorld-LouisArmstrong.mp3"
-              /* src="music/silly/GangstasParadise-Coolio.mp3" */
-            />
-          </audio>
-        </div>
+        { audioStatus === "load" ?? (
+        <AudioPlayer mp3List={mp3List} />
+        )}
       </div>
+
     </div>
 
   );
