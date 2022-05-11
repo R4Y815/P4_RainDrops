@@ -7,11 +7,12 @@ node_modules/*
 # Distribution folder
 dist/*
 
-public/animals
-public/music
-z-Backup
-
+# dotEnv folder
 .env
+
+# all the contents in the music category folders
+public/music/*
+
 
 # but keep the folders with:
 !*.gitkeep/
