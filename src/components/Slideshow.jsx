@@ -6,21 +6,23 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Carousel from 'react-bootstrap/Carousel';
-import Form from 'react-bootstrap/Form';
-import { v4 as uuidv4 } from 'uuid';
-import AudioPlayer from './AudioPlayer.jsx';
+import Galleria from './Galleria.jsx';
+import AudioPlayer2B from './AudioPlayer2B.jsx';
 
 export default function Slideshow() {
   // STATE Variables Read here
   const [emotion, setEmotion] = useState('zero');
   const [gallery, setGallery] = useState([]);
   const [mp3List, setMp3List] = useState([]);
+  // stateVar generated in this AudioPlayer only
+  const [data, setData] = useState();
 
   const [audioStatus, setAudioStatus] = useState("dontLoad");
   // use Refs
   const formRef = useRef();
   const cfmEmotionBtnRef = useRef();
+  const audioPlayerRef = useRef();
+  const sourceRef = useRef();
 
   useEffect(() => {
     axios
@@ -57,12 +59,12 @@ export default function Slideshow() {
       /* audioPlayerRef.current.play(); */
       setMp3List(songs);
 
-      /* audioPlayerRef.load(); */
-      setAudioStatus('load');
-
       // hide the form and button
       formRef.current.hidden = true;
       cfmEmotionBtnRef.current.hidden = true;
+
+      // load the Gallery and audio player
+      setAudioStatus("load");
     });
   };
 
@@ -108,39 +110,20 @@ export default function Slideshow() {
           </Col>
         </Row>
       </Container>
-      <Container className="px-0 mx-0 pt-3 mt-2">
-        <Carousel fade indicators={false}>
-          {gallery.map((entry, index) => (
-            <Carousel.Item interval={2500} key={entry.photoName}>
-              <Container className="p-3">
-                <Row>
-                  <Col md="2">
-                    <Card className="px-2 pt-2" border="dark">
-                      <Card.Img variant="top" src={`photos/${entry.photoName}`} key={index} />
-                      <Card.Body className="px-0 pb-1 pt-3">
-                        <Card.Text className="mb-0 pb-0 text-center" style={{ color: '#000' }} key={entry.comment}>
-                          {entry.comment}
-                        </Card.Text>
-                        <br />
-                        <Card.Text className="mb-0 py-0 timeStamp" style={{ color: '#000' }} key={entry.timePrint}>
-                          {entry.timePrint}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Row>
-              </Container>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </Container>
-
-      <div>
-        { audioStatus === "load" ?? (
-        <AudioPlayer mp3List={mp3List} />
-        )}
-      </div>
-
+      <Galleria gallery={gallery} />
+      { mp3List.map((song) => (
+        <div key={song}>
+          <audio
+            ref={audioPlayerRef}
+            controls
+          >
+            <source
+              ref={sourceRef}
+              src={song}
+            />
+          </audio>
+        </div>
+      ))}
     </div>
 
   );
