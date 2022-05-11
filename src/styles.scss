@@ -21,7 +21,7 @@
 .App {
 	min-height: 100vh;
 	position: relative;
-	background-color: #313131;
+	background-color: #1b1b1b;
 }
 
 .camera {
@@ -130,18 +130,18 @@ textarea {
 
 audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
-	background-color: #313131;
-	color: #313131;
+	background-color: #1b1b1b;
+	color: #1b1b1b;
 }
 
 .filmProjector {
-	color: #313131;
+	color: #1b1b1b;
 	font-size: medium;
 }
 
 .bkgd {
-	background: #313131 !important;
-	border-color: #313131 !important;
+	background: #1b1b1b !important;
+	border-color: #1b1b1b !important;
 }
 
 .navBar {
@@ -153,4 +153,13 @@ audio::-webkit-media-controls-panel {
 	display: flex !important;
 	justify-content: center !important;
 	font-size: xx-small !important;
+}
+
+.songTitleDisp {
+	font-size: x-small !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+	display: none;
 }

@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/media-has-caption */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable quotes */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
@@ -10,18 +13,18 @@ import Galleria from './Galleria.jsx';
 
 export default function Slideshow() {
   // STATE Variables Read here
-  const [emotion, setEmotion] = useState('zero');
+  const [emotion, setEmotion] = useState('');
   const [gallery, setGallery] = useState([]);
   const [mp3List, setMp3List] = useState([]);
   // stateVar generated in this AudioPlayer only
   const [data, setData] = useState();
 
-  const [audioStatus, setAudioStatus] = useState("dontLoad");
   // use Refs
   const formRef = useRef();
   const cfmEmotionBtnRef = useRef();
   const audioPlayerRef = useRef();
   const sourceRef = useRef();
+  const listRef = useRef();
 
   useEffect(() => {
     axios
@@ -53,21 +56,23 @@ export default function Slideshow() {
       }
 
       // activate music
-      /* handleSongChange(); */
-      /* audioPlayerRef.hidden = false; */
-      /* audioPlayerRef.current.play(); */
       setMp3List(songs);
+      /* handleSongChange(); */
+      sourceRef.current.src = songs[0];
+      audioPlayerRef.current.load();
+      audioPlayerRef.current.play();
 
       // hide the form and button
-      formRef.current.hidden = true;
-      cfmEmotionBtnRef.current.hidden = true;
-
-      // load the Gallery and audio player
-      setAudioStatus("load");
+      /* formRef.current.hidden = true;
+      cfmEmotionBtnRef.current.hidden = true; */
     });
   };
 
   console.log('mp3List =', mp3List);
+
+  function getSongName(fileName) {
+    return fileName.split("/")[2].split(".mp3")[0].split("-")[0];
+  }
 
   return (
     <div>
@@ -79,22 +84,22 @@ export default function Slideshow() {
                 <select
                   ref={formRef}
                   value={emotion}
-                  onChange={(e) => setEmotion(e.target.value)}
+                  onClick={(e) => setEmotion(e.target.value)}
                 >
                   <option value="console" key="console">in need of consolation</option>
                   <option value="family" key="family">miss my family</option>
-                  <option value="father" key="father">father`s day</option>
-                  <option value="inspire" key="inspire">feel dejected and bored</option>
+                  <option value="father" key="father">miss my Dad</option>
+                  <option value="inspire" key="inspire">feel like a loser</option>
 
                   <option value="joy" key="joy">feel happy</option>
-                  <option value="lifepartner" key="lifepartner">thinking of him/her...</option>
-                  <option value="lyft" key="lyft">going thru a very hard time...</option>
-                  <option value="motivate" key="motivate">feels like Im never win</option>
+                  <option value="lifepartner" key="lifepartner">I miss him/her...</option>
+                  <option value="lyft" key="lyft">Feels like there's no more hope</option>
+                  <option value="motivate" key="motivate">feels like the odds are impossible</option>
 
-                  <option value="reassure" key="reassure">feeling tired and unsure of myself</option>
-                  <option value="recallGoodness" key="recallGoodness">feeling like giving up</option>
-                  <option value="silly" key="silly">feeling very stressed</option>
-                  <option value="wonder" key="wonder">the world is a terrible place</option>
+                  <option value="reassure" key="reassure">Nobody understands my pain</option>
+                  <option value="recallGoodness" key="recallGoodness">My life is so bitter</option>
+                  <option value="silly" key="silly">Life's so stressful</option>
+                  <option value="wonder" key="wonder">The world is so terrible</option>
                 </select>
                 <Button
                   ref={cfmEmotionBtnRef}
@@ -110,9 +115,31 @@ export default function Slideshow() {
         </Row>
       </Container>
       <Galleria gallery={gallery} />
-      { mp3List.map((song) => (
-        <div key={song}>
-          <audio
+      <div className="text-center">
+        <audio
+          ref={audioPlayerRef}
+          controls
+        >
+          <source
+            ref={sourceRef}
+            src=""
+          />
+        </audio>
+        <ul
+          ref={listRef}
+          className="text-center mx-0 px-0"
+          onClick={(e) => {
+            e.preventDefault();
+            const elm = e.target;
+            sourceRef.current.src = elm.getAttribute('data-value');
+
+            audioPlayerRef.current.load();
+            audioPlayerRef.current.play();
+          }}
+        >
+          { mp3List.map((song) => (
+            <>
+              {/*           <audio
             ref={audioPlayerRef}
             controls
           >
@@ -120,9 +147,12 @@ export default function Slideshow() {
               ref={sourceRef}
               src={song}
             />
-          </audio>
-        </div>
-      ))}
+          </audio>                    */}
+              <li><a href="#" data-value={song} key={song} className="songTitleDisp">{getSongName(song)}</a></li>
+            </>
+          ))}
+        </ul>
+      </div>
     </div>
 
   );

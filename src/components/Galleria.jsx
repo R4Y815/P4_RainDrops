@@ -9,7 +9,7 @@ import Carousel from 'react-bootstrap/Carousel';
 export default function Galleria({ gallery }) {
   return (
     <Container className="px-0 mx-0 pt-3 mt-2">
-      <Carousel fade indicators={false}>
+      <Carousel fade>
         {gallery.map((entry, index) => (
           <Carousel.Item interval={2500} key={entry.photoName}>
             <Container className="p-3">

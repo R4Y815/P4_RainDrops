@@ -6,9 +6,7 @@ import Button from 'react-bootstrap/Button';
 // Import the other child component files here:
 import Page from './components/PageV2.jsx';
 import Slideshow from './components/Slideshow.jsx';
-import Uploader from './components/UploaderFile.jsx';
 import UploaderForSeeds from './components/UploaderForSeeds.jsx';
-import Camera from './components/Camera.jsx';
 
 export default function App() {
   const cameraRef = useRef();

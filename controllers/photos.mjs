@@ -54,7 +54,7 @@ export default function initPhotosController(db) {
           catId = 12;
           break;
         default:
-          catId = 11;
+          response.send('error');
       }
 
       const gallery = await db.Photo.findAll(
