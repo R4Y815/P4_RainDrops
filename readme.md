@@ -7,22 +7,25 @@
 # How to use
 
 **npm run start** to start app.
+
 📷 - CAMERA MODE:
 
 1.  Allows user takes a snap shot.
 2.  User types in short journal entry based on the photo.
 3.  User selects the emoticon describing the mood the user experienced based on what he/ she took a photo of. (currently this works off a desktop/laptop webcam, future plans for it to access the phone camera)
+
     Emotions:
-    🥰❤ - Like/ Love
-    😇🙌 - Feeling Grateful/Thankful
-    😮🤯 - Awe / Mind-Blown
-    😀💡 - Light Bulb moment
-    💪🐱‍👓 - Motivated / Inspired to continue
+
+    - 🥰❤ Like/ Love
+    - 😇🙌 Feeling Grateful/Thankful
+    - 😮🤯 Awe / Mind-Blown
+    - 😀💡 Light Bulb moment
+    - 💪🐱‍👓 Motivated / Inspired to continue
 
 🎥 - GALLERY MODE:
 
-- User selects mood from descriptions in drop down lists.
-- Gallery with photos evoking opposite emotions to the mood selected starts to playback alongside song tracks with matching theme to help lift user's mood
+1. User selects mood from descriptions in drop down lists.
+2. Gallery with photos evoking opposite emotions to the mood selected starts to playback alongside song tracks with matching theme to help lift user's mood
 
 # To Dos:
 
