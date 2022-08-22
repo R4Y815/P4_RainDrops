@@ -1,16 +1,30 @@
 <!-- @format -->
 
-Notes on Bootstrap and React-Bootstrap dependencies
+# RainDrops - Mood-Lifter App
 
-1. for specific components like Grid and Card, we need to import and render in react using the updated syntax
+'RainDrops' is a lightweight photojournal web-app coupled with a slideshow gallery to help lift the mood of the user.
 
-2. things like font colour, flex box, still work --> could it be because Bootstrap 5.1.3 was installed as dev-dependency? or that style sheet to Bs5.1.3 is linked from the html?
-   --> tested... bootstrap5.1.3 npm package was uninstalled and Bootstrap Flex
-   syntax stilled worked in react component
+# How to use
 
---> on removal of stylesheet link to Bs 5.1.3 css, bootstrap flex syntax in react component stops working
+**npm run start** to start app.
+📷 - CAMERA MODE:
 
-incomplete:
+1.  Allows user takes a snap shot.
+2.  User types in short journal entry based on the photo.
+3.  User selects the emoticon describing the mood the user experienced based on what he/ she took a photo of. (currently this works off a desktop/laptop webcam, future plans for it to access the phone camera)
+    Emotions:
+    🥰❤ - Like/ Love
+    😇🙌 - Feeling Grateful/Thankful
+    😮🤯 - Awe / Mind-Blown
+    😀💡 - Light Bulb moment
+    💪🐱‍👓 - Motivated / Inspired to continue
+
+🎥 - GALLERY MODE:
+
+- User selects mood from descriptions in drop down lists.
+- Gallery with photos evoking opposite emotions to the mood selected starts to playback alongside song tracks with matching theme to help lift user's mood
+
+# To Dos:
 
 1. User Login
 2. AI APIs for picking up comment sentiment and photo image recognition
