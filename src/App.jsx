@@ -6,13 +6,12 @@ import Button from 'react-bootstrap/Button';
 // Import the other child component files here:
 import Page from './components/PageV2.jsx';
 import Slideshow from './components/Slideshow.jsx';
-import UploaderForSeeds from './components/UploaderForSeeds.jsx';
+import UploaderForSeeds from './components/UploaderForSeeds.jsx'; // kept for maintenance
 
 export default function App() {
   const cameraRef = useRef();
   const galleryRef = useRef();
 
-  const display = 'gallery';
 
   return (
     <div className="App">

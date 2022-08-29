@@ -54,7 +54,7 @@ export default function initPhotosController(db) {
           catId = 12;
           break;
         default:
-          response.send('error');
+          response.send('key is an unknown emotion');
       }
 
       const gallery = await db.Photo.findAll(
