@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    username: 'raytor27',
+    username: 'ENTER_YOUR_POSTGRESQL_USERNAME',
     password: null,
     database: 'prj4_moodlifter_app',
     host: '127.0.0.1',
