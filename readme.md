@@ -7,6 +7,7 @@
 # How to use
 
 **npm run start** to start app.
+( Ensure postgresql service is running first! )
 
 📷 - CAMERA MODE:
 
