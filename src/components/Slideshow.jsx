@@ -132,24 +132,12 @@ export default function Slideshow() {
             e.preventDefault();
             const elm = e.target;
             sourceRef.current.src = elm.getAttribute('data-value');
-
             audioPlayerRef.current.load();
             audioPlayerRef.current.play();
           }}
         >
           { mp3List.map((song) => (
-            <>
-              {/*           <audio
-            ref={audioPlayerRef}
-            controls
-          >
-            <source
-              ref={sourceRef}
-              src={song}
-            />
-          </audio>                    */}
-              <li><a href="#" data-value={song} key={song} className="songTitleDisp">{getSongName(song)}</a></li>
-            </>
+            <li><a href="#" data-value={song} key={song} className="songTitleDisp">{getSongName(song)}</a></li>
           ))}
         </ul>
       </div>
